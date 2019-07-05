@@ -10,11 +10,10 @@
 */
 Route::group([
     'namespace' => 'Newpixel\BlogCRUD\app\Http\Controllers\Admin',
-        'prefix' => config('backpack.base.route_prefix', 'admin') .'/'. config('blogcrud.route_prefix', 'blog'),
+        'prefix' => config('backpack.base.route_prefix', 'admin').'/'.config('blogcrud.route_prefix', 'blog'),
         'middleware' => ['web', backpack_middleware()],
     ], function () {
         CRUD::resource('article', 'BlogArticleCrudController');
         CRUD::resource('category', 'BlogCategoryCrudController');
         CRUD::resource('tag', 'BlogTagCrudController');
-
     });

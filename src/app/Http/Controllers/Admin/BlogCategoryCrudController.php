@@ -2,17 +2,15 @@
 
 namespace Newpixel\BlogCRUD\app\Http\Controllers\Admin;
 
-use Backpack\CRUD\App\Http\Controllers\CrudController;
-
+use Backpack\CRUD\CrudPanel;
 // VALIDATION: change the requests to match your own file names if you need form validation
+use Newpixel\BlogCRUD\app\Models\BlogCategory;
+use Backpack\CRUD\App\Http\Controllers\CrudController;
 use Newpixel\BlogCRUD\app\Http\Requests\BlogCategoryRequest as StoreRequest;
 use Newpixel\BlogCRUD\app\Http\Requests\BlogCategoryRequest as UpdateRequest;
-use Backpack\CRUD\CrudPanel;
-use Newpixel\BlogCRUD\app\Models\BlogCategory;
 
 /**
- * Class BlogCategoryCrudController
- * @package App\Http\Controllers\Admin
+ * Class BlogCategoryCrudController.
  * @property-read CrudPanel $crud
  */
 class BlogCategoryCrudController extends CrudController
@@ -25,7 +23,7 @@ class BlogCategoryCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('Newpixel\BlogCRUD\app\Models\BlogCategory');
-        $this->crud->setRoute(config('backpack.base.route_prefix') .'/'. config('blogcrud.route_prefix', 'blog') . '/category');
+        $this->crud->setRoute(config('backpack.base.route_prefix').'/'.config('blogcrud.route_prefix', 'blog').'/category');
         $this->crud->setEntityNameStrings('Categorie', 'Categorii');
         $this->crud->enableReorder('name', 0);
         $this->crud->allowAccess('reorder', 1);
@@ -44,21 +42,21 @@ class BlogCategoryCrudController extends CrudController
         $this->crud->addColumns([
             [
                'name'  => 'name',
-               'label' => 'Denumire'
+               'label' => 'Denumire',
             ],
             [
-               'label'     => "Parinte",
-               'type'      => "select",
+               'label'     => 'Parinte',
+               'type'      => 'select',
                'name'      => 'parent_category_id',
                'entity'    => 'parent',
-               'attribute' => "name",
+               'attribute' => 'name',
                'model'     => "Newpixel\BlogCRUD\app\Models\Category",
             ],
             [
                'name'    => 'active',
                'label'   => 'Activ',
                'type'    => 'boolean',
-               'options' => [0 => 'Nu', 1 => 'Da']
+               'options' => [0 => 'Nu', 1 => 'Da'],
             ],
             [
                 'name'  => 'created_at',
@@ -79,7 +77,7 @@ class BlogCategoryCrudController extends CrudController
                 ],
                 [
                     'name'              => 'parent_id',
-                    'label'             => "Categorie parinte",
+                    'label'             => 'Categorie parinte',
                     'type'              => 'select_from_array',
                     'options'           => BlogCategory::AllParent()->pluck('name', 'id')->toArray(),
                     'allows_null'       => true,
@@ -104,18 +102,18 @@ class BlogCategoryCrudController extends CrudController
                 ],
                 [
                     'name'     => 'title',
-                    'label'    => "Meta Title",
+                    'label'    => 'Meta Title',
                     'fake'     => true,
                     'store_in' => 'meta',
-                    'tab'      => 'SEO'
+                    'tab'      => 'SEO',
                 ],
                 [
                     'name'     => 'description',
-                    'label'    => "Meta Description",
+                    'label'    => 'Meta Description',
                     'type'     => 'textarea',
                     'fake'     => true,
                     'store_in' => 'meta',
-                    'tab'      => 'SEO'
+                    'tab'      => 'SEO',
                 ],
                 [
                     'name'     => 'keywords',
@@ -127,19 +125,16 @@ class BlogCategoryCrudController extends CrudController
             ]
         );
 
-
-
         $this->crud->addFilter(
             [
                 'type' => 'simple',
                 'name' => 'trashed',
-                'label'=> 'Sterse'
+                'label'=> 'Sterse',
             ],
             false, function ($values) {
                 $this->crud->query = $this->crud->query->onlyTrashed();
             }
         );
-
     }
 
     public function store(StoreRequest $request)

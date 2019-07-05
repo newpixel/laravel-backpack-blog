@@ -2,11 +2,11 @@
 
 namespace Newpixel\BlogCRUD\app\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
-use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class BlogArticle extends Model
 {
@@ -43,9 +43,10 @@ class BlogArticle extends Model
     public function sluggable()
     {
         return [
-            'slug' => [ 'source' => 'slug_or_name'],
+            'slug' => ['source' => 'slug_or_name'],
         ];
     }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -60,6 +61,7 @@ class BlogArticle extends Model
     {
         return $this->belongsToMany('Newpixel\BlogCRUD\app\Models\BlogTag', 'blog_articles_has_tags')->withTimestamps();
     }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -74,8 +76,10 @@ class BlogArticle extends Model
     public function getSlugOrNameAttribute()
     {
         ($this->slug != '') ? $slug = $this->slug : $slug = $this->name;
+
         return $slug;
     }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

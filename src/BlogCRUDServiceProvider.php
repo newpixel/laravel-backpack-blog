@@ -7,7 +7,6 @@ use Illuminate\Support\ServiceProvider;
 
 class BlogCRUDServiceProvider extends ServiceProvider
 {
-
     /**
      * Where the route file lives, both inside the package and in the app (if overwritten).
      *
@@ -31,9 +30,8 @@ class BlogCRUDServiceProvider extends ServiceProvider
             ], 'config');
 
             $this->publishes([
-                __DIR__.'/database/migrations/' => database_path('migrations')
+                __DIR__.'/database/migrations/' => database_path('migrations'),
             ], 'migrations');
-
 
             // Publishing the views.
             /*$this->publishes([
