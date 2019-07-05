@@ -2,16 +2,14 @@
 
 namespace Newpixel\BlogCRUD\app\Http\Controllers\Admin;
 
-use Backpack\CRUD\App\Http\Controllers\CrudController;
-
+use Backpack\CRUD\CrudPanel;
 // VALIDATION: change the requests to match your own file names if you need form validation
+use Backpack\CRUD\App\Http\Controllers\CrudController;
 use Newpixel\BlogCRUD\app\Http\Requests\BlogTagRequest as StoreRequest;
 use Newpixel\BlogCRUD\app\Http\Requests\BlogTagRequest as UpdateRequest;
-use Backpack\CRUD\CrudPanel;
 
 /**
- * Class BlogTagCrudController
- * @package App\Http\Controllers\Admin
+ * Class BlogTagCrudController.
  * @property-read CrudPanel $crud
  */
 class BlogTagCrudController extends CrudController
@@ -24,7 +22,7 @@ class BlogTagCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('Newpixel\BlogCRUD\app\Models\BlogTag');
-        $this->crud->setRoute(config('backpack.base.route_prefix') .'/'. config('blogcrud.route_prefix', 'blog') . '/tag');
+        $this->crud->setRoute(config('backpack.base.route_prefix').'/'.config('blogcrud.route_prefix', 'blog').'/tag');
         $this->crud->setEntityNameStrings('Eticheta', 'Etichete');
 
         // add asterisk for fields that are required in BlogTagRequest
@@ -41,13 +39,13 @@ class BlogTagCrudController extends CrudController
         $this->crud->addColumns([
             [
                'name'  => 'name',
-               'label' => 'Denumire'
+               'label' => 'Denumire',
             ],
             [
                'name'    => 'active',
                'label'   => 'Activ',
                'type'    => 'boolean',
-               'options' => [0 => 'Nu', 1 => 'Da']
+               'options' => [0 => 'Nu', 1 => 'Da'],
             ],
             [
                 'name'  => 'created_at',
@@ -84,18 +82,18 @@ class BlogTagCrudController extends CrudController
                 ],
                 [
                     'name'     => 'title',
-                    'label'    => "Meta Title",
+                    'label'    => 'Meta Title',
                     'fake'     => true,
                     'store_in' => 'meta',
-                    'tab'      => 'SEO'
+                    'tab'      => 'SEO',
                 ],
                 [
                     'name'     => 'description',
-                    'label'    => "Meta Description",
+                    'label'    => 'Meta Description',
                     'type'     => 'textarea',
                     'fake'     => true,
                     'store_in' => 'meta',
-                    'tab'      => 'SEO'
+                    'tab'      => 'SEO',
                 ],
                 [
                     'name'     => 'keywords',
@@ -107,19 +105,16 @@ class BlogTagCrudController extends CrudController
             ]
         );
 
-
-
         $this->crud->addFilter(
             [
                 'type' => 'simple',
                 'name' => 'trashed',
-                'label'=> 'Sterse'
+                'label'=> 'Sterse',
             ],
             false, function ($values) {
                 $this->crud->query = $this->crud->query->onlyTrashed();
             }
         );
-
     }
 
     public function store(StoreRequest $request)

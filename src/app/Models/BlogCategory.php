@@ -2,11 +2,11 @@
 
 namespace Newpixel\BlogCRUD\app\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
-use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class BlogCategory extends Model
 {
@@ -32,6 +32,7 @@ class BlogCategory extends Model
     protected $casts = [
         'meta' => 'object',
     ];
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -40,9 +41,10 @@ class BlogCategory extends Model
     public function sluggable()
     {
         return [
-            'slug' => [ 'source' => 'slug_or_name'],
+            'slug' => ['source' => 'slug_or_name'],
         ];
     }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -62,6 +64,7 @@ class BlogCategory extends Model
     {
         return $this->belongsToMany('Newpixel\BlogCRUD\app\Models\BlogArticle', 'blog_categories_has_articles')->withTimestamps();
     }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -76,6 +79,7 @@ class BlogCategory extends Model
     {
         return $query->where('parent_id', null)->active();
     }
+
     /*
     |--------------------------------------------------------------------------
     | ACCESORS
@@ -84,8 +88,10 @@ class BlogCategory extends Model
     public function getSlugOrNameAttribute()
     {
         ($this->slug != '') ? $slug = $this->slug : $slug = $this->name;
+
         return $slug;
     }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

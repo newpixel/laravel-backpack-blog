@@ -2,16 +2,14 @@
 
 namespace Newpixel\BlogCRUD\app\Http\Controllers\Admin;
 
-use Backpack\CRUD\App\Http\Controllers\CrudController;
-
+use Backpack\CRUD\CrudPanel;
 // VALIDATION: change the requests to match your own file names if you need form validation
+use Backpack\CRUD\App\Http\Controllers\CrudController;
 use Newpixel\BlogCRUD\app\Http\Requests\BlogArticleRequest as StoreRequest;
 use Newpixel\BlogCRUD\app\Http\Requests\BlogArticleRequest as UpdateRequest;
-use Backpack\CRUD\CrudPanel;
 
 /**
- * Class BlogArticleCrudController
- * @package App\Http\Controllers\Admin
+ * Class BlogArticleCrudController.
  * @property-read CrudPanel $crud
  */
 class BlogArticleCrudController extends CrudController
@@ -24,7 +22,7 @@ class BlogArticleCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('Newpixel\BlogCRUD\app\Models\BlogArticle');
-        $this->crud->setRoute(config('backpack.base.route_prefix') .'/'. config('blogcrud.route_prefix', 'blog') . '/article');
+        $this->crud->setRoute(config('backpack.base.route_prefix').'/'.config('blogcrud.route_prefix', 'blog').'/article');
         $this->crud->setEntityNameStrings('Articol', 'Articole');
 
         // add asterisk for fields that are required in BlogArticleRequest
@@ -40,10 +38,10 @@ class BlogArticleCrudController extends CrudController
         $this->crud->addColumns([
             [
                'name'  => 'name',
-               'label' => 'Denumire'
+               'label' => 'Denumire',
             ],
             [
-                'label'             => "Categorii",
+                'label'             => 'Categorii',
                 'type'              => 'select_multiple',
                 'name'              => 'categories',
                 'entity'            => 'categories',
@@ -61,7 +59,7 @@ class BlogArticleCrudController extends CrudController
                 'wrapperAttributes' => ['class' => 'form-group col-md-2'],
             ],
             [
-                'label'             => "Etichete",
+                'label'             => 'Etichete',
                 'type'              => 'select_multiple',
                 'name'              => 'tags',
                 'entity'            => 'tags',
@@ -96,7 +94,7 @@ class BlogArticleCrudController extends CrudController
                     'wrapperAttributes' => ['class' => 'form-group col-md-2'],
                 ],
                 [
-                    'label'             => "Categorii",
+                    'label'             => 'Categorii',
                     'type'              => 'select2_multiple',
                     'name'              => 'categories',
                     'entity'            => 'categories',
@@ -115,7 +113,7 @@ class BlogArticleCrudController extends CrudController
                     'wrapperAttributes' => ['class' => 'form-group col-md-12'],
                 ],
                 [
-                    'label'             => "Etichete",
+                    'label'             => 'Etichete',
                     'type'              => 'select2_multiple',
                     'name'              => 'tags',
                     'entity'            => 'tags',
@@ -128,18 +126,18 @@ class BlogArticleCrudController extends CrudController
                 ],
                 [
                     'name'     => 'title',
-                    'label'    => "Meta Title",
+                    'label'    => 'Meta Title',
                     'fake'     => true,
                     'store_in' => 'meta',
-                    'tab'      => 'SEO'
+                    'tab'      => 'SEO',
                 ],
                 [
                     'name'     => 'description',
-                    'label'    => "Meta Description",
+                    'label'    => 'Meta Description',
                     'type'     => 'textarea',
                     'fake'     => true,
                     'store_in' => 'meta',
-                    'tab'      => 'SEO'
+                    'tab'      => 'SEO',
                 ],
                 [
                     'name'     => 'keywords',
@@ -155,14 +153,13 @@ class BlogArticleCrudController extends CrudController
             [
                 'type' => 'simple',
                 'name' => 'trashed',
-                'label'=> 'Sterse'
+                'label'=> 'Sterse',
             ],
             false,
             function ($values) {
                 $this->crud->query = $this->crud->query->onlyTrashed();
             }
         );
-
     }
 
     public function store(StoreRequest $request)
