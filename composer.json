@@ -1,0 +1,56 @@
+{
+    "name": "newpixel/laravel-backpack-blog",
+    "description": "An admin panel for blog articles on Laravel 5, using https://github.com/Laravel-Backpack/crud. Write articles, with categories and tags.",
+    "keywords": [
+        "laravel",
+        "backpack",
+        "blog",
+        "articles",
+        "laravel-backpack-blog"
+    ],
+    "homepage": "https://github.com/newpixel/laravel-backpack-blog",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Catalin Prodan",
+            "email": "catalin.prodan@newpixel.ro",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "illuminate/support": "5.8.*",
+        "backpack/crud": "3.5.*|3.6.*",
+        "cviebrock/eloquent-sluggable": "^4.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "3.8.*",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Newpixel\\BlogCRUD\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Newpixel\\BlogCRUD\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Newpixel\\BlogCRUD\\BlogCRUDServiceProvider"
+            ]
+        }
+    }
+}
