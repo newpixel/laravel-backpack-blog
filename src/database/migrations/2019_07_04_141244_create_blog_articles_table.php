@@ -15,7 +15,7 @@ class CreateBlogArticlesTable extends Migration
         Schema::create('blog_articles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('author_id')->index()->unsigned()->nullable();
+            $table->bigInteger('author_id')->index()->unsigned()->nullable();
             $table->foreign('author_id')->references('id')->on('users')->onDelete('no action');
             $table->longText('content')->nullable();
             $table->string('feature_image')->nullable();
