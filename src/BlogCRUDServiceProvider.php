@@ -50,7 +50,7 @@ class BlogCRUDServiceProvider extends ServiceProvider
 
             // Registering package commands.
             $this->commands([
-                \Newpixel\BlogCRUD\app\Console\Commands\AddSidebarContentLinks::class,
+                \Newpixel\BlogCRUD\app\Console\Commands\AddSidebarBlogLinks::class,
             ]);
         }
     }
